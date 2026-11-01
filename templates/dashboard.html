@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Analysis Results</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="dashboard">
+        <h1>Your Resume Analysis</h1>
+        <p>Review your results and improvement suggestions.</p>
+
+        <section class="result-card">
+            <h2>Resume Score</h2>
+            <div class="score">{{ results.score }}/100</div>
+            <p>This is a basic rule-based score, not a
+               guaranteed ATS rating.</p>
+        </section>
+
+        <section class="result-card">
+            <h2>Job Description Match</h2>
+            <div class="score">{{ results.match_score }}%</div>
+            <p>Based on skills identified in the supplied job description.</p>
+        </section>
+
+        <section class="result-card">
+            <h2>Skills Found</h2>
+            {% if results.skills %}
+                <ul>
+                {% for skill in results.skills %}
+                    <li>{{ skill }}</li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No skills from the current skill list were found.</p>
+            {% endif %}
+        </section>
+
+        <section class="result-card">
+            <h2>Potential Missing Skills</h2>
+            {% if results.missing_skills %}
+                <ul>
+                {% for skill in results.missing_skills %}
+                    <li>{{ skill }}</li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No missing skills identified from the current list.</p>
+            {% endif %}
+        </section>
+
+        <section class="result-card">
+            <h2>Improvement Recommendations</h2>
+            <ul>
+            {% for suggestion in results.suggestions %}
+                <li>{{ suggestion }}</li>
+            {% endfor %}
+            </ul>
+        </section>
+
+        <a class="back-link" href="/">Analyze Another Resume</a>
+    </main>
+</body>
+</html>

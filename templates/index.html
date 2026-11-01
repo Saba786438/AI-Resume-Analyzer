@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Analyzer</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="navbar">
+        <h2>ResumeAI</h2>
+        <a href="#analyzer">Analyze Resume</a>
+    </header>
+
+    <main>
+        <section class="hero">
+            <p class="tag">SMART CAREER TOOL</p>
+            <h1>Make Your Resume<br>Stand Out.</h1>
+            <p>Analyze your resume, discover your skills,
+               and improve your job match.</p>
+
+            <form id="analyzer" method="POST"
+                  enctype="multipart/form-data">
+                <label for="resume">Upload your resume (PDF/DOCX)</label>
+                <input id="resume" type="file" name="resume"
+                       accept=".pdf,.docx" required>
+
+                <label for="job_description">
+                    Paste the job description
+                </label>
+                <textarea id="job_description"
+                          name="job_description"
+                          placeholder="Paste job requirements here..."
+                          rows="6"></textarea>
+
+                <button type="submit">Analyze My Resume</button>
+            </form>
+
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+        </section>
+    </main>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
